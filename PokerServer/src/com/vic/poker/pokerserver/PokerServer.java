@@ -87,7 +87,7 @@ public class PokerServer extends UnicastRemoteObject implements Server {
 	@Override
 	public  Map<String,ResultVO> setCard() throws RemoteException {
 
-
+		cardSort();
 
 		
 		vo1.setArrCard_1(arrCard_1);
@@ -154,6 +154,39 @@ public class PokerServer extends UnicastRemoteObject implements Server {
 		}
 
 		return count;
+	}
+	
+	private void cardSort() {
+		for(int i =0; i < arrCard_1.length; i++) {
+			for(int j =0 ; j < arrCard_1.length ; j++) {
+				if(arrCard_1[i]%13 != arrCard_1[j]%13 && arrCard_1[i]%13 < arrCard_1[j]%13){
+					arrCard_1[i] ^= arrCard_1[j];
+					arrCard_1[j] ^= arrCard_1[i];
+					arrCard_1[i] ^= arrCard_1[j];
+				}
+				if(arrCard_2[i]%13 != arrCard_2[j]%13 && arrCard_2[i]%13 < arrCard_2[j]%13){
+					arrCard_2[i] ^= arrCard_2[j];
+					arrCard_2[j] ^= arrCard_2[i];
+					arrCard_2[i] ^= arrCard_2[j];
+				}	
+			}
+		}
+
+		for(int i =0; i < arrCard_1.length; i++){
+			for(int j =0 ; j < arrCard_1.length ; j++) {
+				if(arrCard_1[i]%13 == arrCard_1[j]%13 && arrCard_1[i]/13 < arrCard_1[j]/13){
+					int tmp = arrCard_1[i];
+					arrCard_1[i] = arrCard_1[j];
+					arrCard_1[j] = tmp;
+				}
+				if(arrCard_2[i]%13 == arrCard_2[j]%13 && arrCard_2[i]/13 < arrCard_2[j]/13){
+					int tmp = arrCard_2[i];
+					arrCard_2[i] = arrCard_2[j];
+					arrCard_2[j] = tmp;
+				}	
+			}
+		}
+		
 	}
 
 	@Override
@@ -240,6 +273,21 @@ public class PokerServer extends UnicastRemoteObject implements Server {
 		PokerServer server = new PokerServer();
 		registry.bind("remote", server);
 
+	}
+
+	@Override
+	public void callStartGame() throws RemoteException {
+		for(Client c : userList) {
+			c.startGame();
+		}
+	}
+
+	@Override
+	public void callEndGame() throws RemoteException {
+		changeCnt =0;
+		for(Client c : userList) {
+			c.endGame();
+		}
 	}
 
 

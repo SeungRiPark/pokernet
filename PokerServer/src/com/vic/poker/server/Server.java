@@ -16,4 +16,6 @@ public interface Server extends Remote {
 	public void callCardPrint(String[] name) throws RemoteException;
 	public void callResultCard() throws RemoteException;
 	public void setRndCard() throws RemoteException;
+	public void callStartGame() throws RemoteException;
+	public void callEndGame() throws RemoteException;
 }

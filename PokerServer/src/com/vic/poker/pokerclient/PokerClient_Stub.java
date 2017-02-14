@@ -9,15 +9,19 @@ public final class PokerClient_Stub
 {
     private static final long serialVersionUID = 2;
     
-    private static java.lang.reflect.Method $method_getName_0;
-    private static java.lang.reflect.Method $method_getResultCard_1;
-    private static java.lang.reflect.Method $method_printCard_2;
+    private static java.lang.reflect.Method $method_endGame_0;
+    private static java.lang.reflect.Method $method_getName_1;
+    private static java.lang.reflect.Method $method_getResultCard_2;
+    private static java.lang.reflect.Method $method_printCard_3;
+    private static java.lang.reflect.Method $method_startGame_4;
     
     static {
 	try {
-	    $method_getName_0 = com.vic.poker.client.Client.class.getMethod("getName", new java.lang.Class[] {});
-	    $method_getResultCard_1 = com.vic.poker.client.Client.class.getMethod("getResultCard", new java.lang.Class[] {});
-	    $method_printCard_2 = com.vic.poker.client.Client.class.getMethod("printCard", new java.lang.Class[] {});
+	    $method_endGame_0 = com.vic.poker.client.Client.class.getMethod("endGame", new java.lang.Class[] {});
+	    $method_getName_1 = com.vic.poker.client.Client.class.getMethod("getName", new java.lang.Class[] {});
+	    $method_getResultCard_2 = com.vic.poker.client.Client.class.getMethod("getResultCard", new java.lang.Class[] {});
+	    $method_printCard_3 = com.vic.poker.client.Client.class.getMethod("printCard", new java.lang.Class[] {});
+	    $method_startGame_4 = com.vic.poker.client.Client.class.getMethod("startGame", new java.lang.Class[] {});
 	} catch (java.lang.NoSuchMethodException e) {
 	    throw new java.lang.NoSuchMethodError(
 		"stub class initialization failed");
@@ -31,12 +35,27 @@ public final class PokerClient_Stub
     
     // methods from remote interfaces
     
+    // implementation of endGame()
+    public void endGame()
+	throws java.rmi.RemoteException
+    {
+	try {
+	    ref.invoke(this, $method_endGame_0, null, 258781963203249526L);
+	} catch (java.lang.RuntimeException e) {
+	    throw e;
+	} catch (java.rmi.RemoteException e) {
+	    throw e;
+	} catch (java.lang.Exception e) {
+	    throw new java.rmi.UnexpectedException("undeclared checked exception", e);
+	}
+    }
+    
     // implementation of getName()
     public void getName()
 	throws java.rmi.RemoteException
     {
 	try {
-	    ref.invoke(this, $method_getName_0, null, -2704301216624735055L);
+	    ref.invoke(this, $method_getName_1, null, -2704301216624735055L);
 	} catch (java.lang.RuntimeException e) {
 	    throw e;
 	} catch (java.rmi.RemoteException e) {
@@ -51,7 +70,7 @@ public final class PokerClient_Stub
 	throws java.rmi.RemoteException
     {
 	try {
-	    ref.invoke(this, $method_getResultCard_1, null, -3249845929072415502L);
+	    ref.invoke(this, $method_getResultCard_2, null, -3249845929072415502L);
 	} catch (java.lang.RuntimeException e) {
 	    throw e;
 	} catch (java.rmi.RemoteException e) {
@@ -66,7 +85,22 @@ public final class PokerClient_Stub
 	throws java.rmi.RemoteException
     {
 	try {
-	    ref.invoke(this, $method_printCard_2, null, 1377309457055294723L);
+	    ref.invoke(this, $method_printCard_3, null, 1377309457055294723L);
+	} catch (java.lang.RuntimeException e) {
+	    throw e;
+	} catch (java.rmi.RemoteException e) {
+	    throw e;
+	} catch (java.lang.Exception e) {
+	    throw new java.rmi.UnexpectedException("undeclared checked exception", e);
+	}
+    }
+    
+    // implementation of startGame()
+    public void startGame()
+	throws java.rmi.RemoteException
+    {
+	try {
+	    ref.invoke(this, $method_startGame_4, null, 7826272692900709118L);
 	} catch (java.lang.RuntimeException e) {
 	    throw e;
 	} catch (java.rmi.RemoteException e) {

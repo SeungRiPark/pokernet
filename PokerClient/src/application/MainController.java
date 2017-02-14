@@ -74,7 +74,7 @@ public class MainController extends PokerClient implements Initializable{
 
 	ArrayList<Integer> list = new ArrayList<Integer>();
 	int cnt;
-	boolean isStart = false, isEnd = true,tok=true;
+	boolean isStart = false, isEnd = true;
 
 
 
@@ -116,10 +116,13 @@ public class MainController extends PokerClient implements Initializable{
 
 	@FXML
 	public void onClickBatCard(ActionEvent event) {
-		if(!isStart) {
+	
 
+		if(!isStart) {
+			
 			String[] name = {name_my,name_enermy};
 			try {
+				server.callStartGame();
 				server.setRndCard();
 				server.callCardPrint(name);
 			} catch (RemoteException e) {
@@ -154,7 +157,7 @@ public class MainController extends PokerClient implements Initializable{
 
 	@FXML
 	public void setOnclickChangeCard(MouseEvent event) {
-		System.out.println("isStart : "+isStart + ", isEnd : "+isEnd);
+
 		if(isStart && !isEnd){
 			((ImageView)event.getTarget()).setImage(new Image("resource/poker_0.JPG"));
 			list.add(Integer.parseInt(((ImageView)event.getTarget()).getId()));
@@ -163,9 +166,11 @@ public class MainController extends PokerClient implements Initializable{
 
 	@FXML
 	public void setOnClickCahngeButton() {
+
 		if(isStart && !isEnd ){
-			
+
 			try {
+
 				cnt = server.getChangeCard(name_my, list);
 				resultMap = (HashMap<String, ResultVO>) server.setResult();
 				arrCard_2 = resultMap.get(name_my).getArrCard_1();
@@ -173,10 +178,12 @@ public class MainController extends PokerClient implements Initializable{
 				if(cnt == 2){
 					server.callCardPrint(new String[]{name_my,name_enermy});
 					server.callResultCard();
+					server.callEndGame();
+
 				}
-				isEnd = true;
-				isStart = false;
-				tok = true;
+				System.out.println("1");
+
+
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -263,7 +270,7 @@ public class MainController extends PokerClient implements Initializable{
 
 	@Override
 	public void printCard() {
-		
+
 		try {
 			resultMap = (HashMap<String, ResultVO>) server.setCard();
 			arrCard_2 = resultMap.get(name_my).getArrCard_1();
@@ -272,25 +279,31 @@ public class MainController extends PokerClient implements Initializable{
 			e.printStackTrace();
 		}
 
-		if(tok){
-			tok = false;
-			isEnd = false;
-			isStart = true;
-		}
+
 
 		myCardPrint();
 		enermyCardPrint();
 	}
-	
+
+	public void startGame() {
+		isEnd = false;
+		isStart = true;
+	}
+
+	public void endGame() {
+		isStart = false;
+		isEnd = true;
+	}
+
 	public void myCardPrint() {
 		for(int i = 0 ; i < arrImageView_1.length; i++) {
 
-			
+
 			arrImageView_2[i].setImage(arrImage_dice[arrCard_2[i]]);
 			arrImageView_2[i].setId(""+(arrCard_2[i]));
 		}
 	}
-	
+
 	public void enermyCardPrint() {
 		for(int i = 0 ; i < arrImageView_1.length; i++) {
 
